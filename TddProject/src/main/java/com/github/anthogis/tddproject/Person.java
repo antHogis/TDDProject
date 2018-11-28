@@ -1,17 +1,18 @@
 package com.github.anthogis.tddproject;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Person {
     private String firstName;
     private String lastName;
-    private Date birthDate;
+    private LocalDate birthDate;
 
      public Person() {
 
      }
 
-    public Person(String firstName, String lastName, Date birthDate) {
+    public Person(String firstName, String lastName, LocalDate birthDate) {
         setFirstName(firstName);
         setLastName(lastName);
         setBirthDate(birthDate);
@@ -33,23 +34,24 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) throws PersonNotBornYetException {
-        if (birthDate.compareTo(new Date()) > 0) {
+    public void setBirthDate(LocalDate birthDate) throws PersonNotBornYetException {
+        if (birthDate.compareTo(LocalDate.now()) > 0) {
             throw new PersonNotBornYetException("Person not born yet");
         } else {
             this.birthDate = birthDate;
         }
     }
 
-    public class PersonNotBornYetException extends RuntimeException{
-        public PersonNotBornYetException() {
-            super();
-        }
+    public boolean isUnderAge() {
+         return false;
+    }
 
+
+    public class PersonNotBornYetException extends RuntimeException{
         public PersonNotBornYetException(String message) {
             super(message);
         }

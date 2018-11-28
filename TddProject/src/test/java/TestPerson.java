@@ -1,8 +1,8 @@
 import com.github.anthogis.tddproject.Person;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -11,31 +11,31 @@ import static org.junit.Assert.*;
 
 public class TestPerson {
     static Person person;
-    static Calendar calendar;
+    static LocalDate date;
 
     @BeforeClass
     public static void init() {
         person = new Person();
-        calendar = new GregorianCalendar();
+        date = LocalDate.now();
     }
 
     @Test(expected = Person.PersonNotBornYetException.class)
     public void testSetBirthDateException() {
         init();
-        calendar.roll(Calendar.DAY_OF_MONTH, 1);
-        person.setBirthDate(new Date(calendar.getTimeInMillis()));
+        date = date.plusMonths(1);
+        person.setBirthDate(date);
     }
 
     @Test
     public void testIsUnder18() {
         init();
-        calendar.roll(Calendar.YEAR, -20);
-        person.setBirthDate(new Date(calendar.getTimeInMillis()));
+        date = date.minusYears(20);
+        person.setBirthDate(date);
         assertTrue(person.isUnderAge());
 
         init();
-        calendar.roll(Calendar.YEAR, -17);
-        person.setBirthDate(new Date(calendar.getTimeInMillis()));
+        date = date.minusYears(17);
+        person.setBirthDate(date);
         assertFalse(person.isUnderAge());
     }
 
