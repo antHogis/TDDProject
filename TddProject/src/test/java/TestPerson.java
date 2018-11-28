@@ -29,7 +29,14 @@ public class TestPerson {
     @Test
     public void testIsUnder18() {
         init();
+        calendar.roll(Calendar.YEAR, -20);
+        person.setBirthDate(new Date(calendar.getTimeInMillis()));
+        assertTrue(person.isUnderAge());
 
+        init();
+        calendar.roll(Calendar.YEAR, -17);
+        person.setBirthDate(new Date(calendar.getTimeInMillis()));
+        assertFalse(person.isUnderAge());
     }
 
 
