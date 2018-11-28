@@ -1,13 +1,15 @@
 package com.github.anthogis.tddproject;
 
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class App {
+    static Scanner scanner;
     static LearningInstitution school;
     static boolean run;
 
     public static void main(String [] args) {
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         run = true;
         school = new LearningInstitution();
 
@@ -23,7 +25,7 @@ public class App {
         boolean validCommand = false;
         for (Commands c : Commands.values()) {
             if (input.equals(c.command)) {
-                c.runnable.run();
+                c.consumer.accept(input);
                 validCommand = true;
             }
         }
@@ -38,25 +40,27 @@ public class App {
 
         private String command;
         private String description;
-        private Runnable runnable;
+        private Consumer<String> consumer;
 
-        Commands(String command, String description, Runnable runnable) {
+        Commands(String command, String description, Consumer<String> consumer) {
             this.command = command;
             this.description = description;
-            this.runnable = runnable;
+            this.consumer = consumer;
         }
 
-        static void help() {
+        static void help(String input) {
             for (Commands c : Commands.values()) {
                 System.out.printf("%s - %s\n", c.command, c.description);
             }
         }
 
-        static void quit() {
+        static void quit(String input) {
+            System.out.println("Goodbye!");
             App.run = false;
         }
 
-        static void addStudent() {
+        static void addStudent(String input) {
+
 
         }
     }
