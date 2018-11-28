@@ -21,7 +21,7 @@ public class Course {
         if (MAX_STUDENTS > 0) {
             this.MAX_STUDENTS = MAX_STUDENTS;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Argument must be a positive integer");
         }
     }
 }
