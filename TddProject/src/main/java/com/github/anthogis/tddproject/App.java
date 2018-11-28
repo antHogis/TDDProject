@@ -1,5 +1,6 @@
 package com.github.anthogis.tddproject;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
@@ -7,6 +8,7 @@ public class App {
     static Scanner scanner;
     static LearningInstitution school;
     static boolean run;
+    final static String invalid = "Invalid input!";
 
     public static void main(String [] args) {
         scanner = new Scanner(System.in);
@@ -30,7 +32,7 @@ public class App {
             }
         }
 
-        if (!validCommand) System.out.println("Invalid input!");
+        if (!validCommand) System.out.println(invalid);
     }
 
     private enum Commands {
@@ -60,8 +62,37 @@ public class App {
         }
 
         static void addStudent(String input) {
+            boolean valid = false;
+            Person student = new Person();
 
+            System.out.println("Give first name for student");
+            while (!valid) try {
+                String name = scanner.nextLine();
+                student.setFirstName(name);
+                valid = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(invalid);
+            }
 
+            valid = false;
+            System.out.println("Give last name for student");
+            while (!valid) try {
+                String name = scanner.nextLine();
+                student.setLastName(name);
+                valid = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(invalid);
+            }
+
+            valid = false;
+            System.out.println("Give birth date of student in format YYYY-MM-DD");
+            while (!valid) try {
+                String date = scanner.nextLine();
+                student.setBirthDate(LocalDate.parse(date));
+                valid = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(invalid);
+            }
         }
     }
 }
