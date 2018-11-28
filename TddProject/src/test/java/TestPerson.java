@@ -1,4 +1,5 @@
 import com.github.anthogis.tddproject.Person;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,9 +19,18 @@ public class TestPerson {
         calendar = new GregorianCalendar();
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = Person.PersonNotBornYetException.class)
     public void testSetBirthDateException() {
+        init();
         calendar.roll(Calendar.DAY_OF_MONTH, 1);
         person.setBirthDate(new Date(calendar.getTimeInMillis()));
     }
+
+    @Test
+    public void testIsUnder18() {
+        init();
+
+    }
+
+
 }

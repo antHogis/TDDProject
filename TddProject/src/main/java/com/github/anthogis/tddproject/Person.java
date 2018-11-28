@@ -37,11 +37,21 @@ public class Person {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) throws RuntimeException {
+    public void setBirthDate(Date birthDate) throws PersonNotBornYetException {
         if (birthDate.compareTo(new Date()) > 0) {
-            throw new RuntimeException("Person not born yet");
+            throw new PersonNotBornYetException("Person not born yet");
         } else {
             this.birthDate = birthDate;
+        }
+    }
+
+    public class PersonNotBornYetException extends RuntimeException{
+        public PersonNotBornYetException() {
+            super();
+        }
+
+        public PersonNotBornYetException(String message) {
+            super(message);
         }
     }
 }
