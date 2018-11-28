@@ -18,7 +18,7 @@ public class App {
         System.out.println("Welcome!\nType help to see list of commands.");
 
         while (run) {
-            System.out.print('>');
+            System.out.print("main>");
             handleInput(scanner.nextLine());
         }
     }
@@ -64,35 +64,42 @@ public class App {
         static void addStudent(String input) {
             boolean valid = false;
             Person student = new Person();
+            String mode = "add>";
+            String error = "%s (Reason: %s)";
 
             System.out.println("Give first name for student");
             while (!valid) try {
+                System.out.print(mode);
                 String name = scanner.nextLine();
                 student.setFirstName(name);
                 valid = true;
             } catch (IllegalArgumentException e) {
-                System.out.println(invalid);
+                System.out.println(String.format(error,invalid,e.getMessage()));
             }
 
             valid = false;
             System.out.println("Give last name for student");
             while (!valid) try {
+                System.out.print(mode);
                 String name = scanner.nextLine();
                 student.setLastName(name);
                 valid = true;
             } catch (IllegalArgumentException e) {
-                System.out.println(invalid);
+                System.out.println(String.format(error,invalid,e.getMessage()));
             }
 
             valid = false;
             System.out.println("Give birth date of student in format YYYY-MM-DD");
             while (!valid) try {
+                System.out.print(mode);
                 String date = scanner.nextLine();
                 student.setBirthDate(LocalDate.parse(date));
                 valid = true;
-            } catch (IllegalArgumentException e) {
-                System.out.println(invalid);
+            } catch (Exception e) {
+                System.out.println(String.format(error,invalid,e.getMessage()));
             }
+
+            System.out.println("Student added!");
         }
     }
 }
