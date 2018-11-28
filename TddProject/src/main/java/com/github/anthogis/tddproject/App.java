@@ -1,6 +1,7 @@
 package com.github.anthogis.tddproject;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
@@ -37,8 +38,9 @@ public class App {
 
     private enum Commands {
         HELP("help", "List all commands", Commands::help),
-        QUIT("quit", "Quit the app.", Commands::quit),
-        ADD_STUDENT("add student", "Add student to the school", Commands::addStudent);
+        QUIT("quit", "Quit the app", Commands::quit),
+        ADD_STUDENT("add stud", "Add student to the school", Commands::addStudent),
+        LIST_STUDENTS("list studs", "List students", Commands::listStudents);
 
         private String command;
         private String description;
@@ -99,7 +101,21 @@ public class App {
                 System.out.println(String.format(error,invalid,e.getMessage()));
             }
 
+            school.addStudent(student);
             System.out.println("Student added!");
+        }
+
+        static void listStudents(String input) {
+            List<Person> students = school.getStudents();
+            for (int i = 0; i < students.size(); i++) {
+                Person s = students.get(i);
+                System.out.printf("%d. %s, %s %s\n", i, s.getLastName(),
+                        s.getFirstName(), s.getBirthDate());
+            }
+
+            if (students.size() < 1) {
+                System.out.println("There are no students in this school!");
+            }
         }
     }
 }

@@ -31,4 +31,8 @@ public class LearningInstitution {
         addGrant(10);
     }
 
+    public List<Person> getStudents() {
+        return students;
+    }
+
 }
