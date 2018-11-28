@@ -31,8 +31,19 @@ public class LearningInstitution {
         addGrant(10);
     }
 
-    public List<Person> getStudents() {
-        return students;
+    public void addCourse() {
+
+    }
+
+    public List<String> getStudentInfoList() {
+        List<String> studentList = new ArrayList<>(students.size());
+        for (int i = 0; i < students.size(); i++) {
+            Person s = students.get(i);
+            studentList.add(String.format("%d. %s, %s %s\n", i, s.getLastName(),
+                    s.getFirstName(), s.getBirthDate()));
+        }
+
+        return studentList;
     }
 
 }

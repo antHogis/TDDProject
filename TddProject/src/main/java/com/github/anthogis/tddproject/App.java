@@ -106,11 +106,10 @@ public class App {
         }
 
         static void listStudents(String input) {
-            List<Person> students = school.getStudents();
-            for (int i = 0; i < students.size(); i++) {
-                Person s = students.get(i);
-                System.out.printf("%d. %s, %s %s\n", i, s.getLastName(),
-                        s.getFirstName(), s.getBirthDate());
+            List<String> students = school.getStudentInfoList();
+
+            for (String student : students) {
+                System.out.println(student);
             }
 
             if (students.size() < 1) {
