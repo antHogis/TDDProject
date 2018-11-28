@@ -102,9 +102,11 @@ public class TestPerson {
     @Test
     public void testSetLastNameValid() {
         init();
-        String[] validNames = {"Po", "Yrjö", "George"};
+        String[] validNames = {"Po", "Yrjö", "george"};
         setNameHelper(validNames, true, false);
-        assertEquals(validNames[validNames.length - 1], person.getLastName());
+        String lastofValid = validNames[validNames.length - 1].substring(0,1).toUpperCase() +
+                validNames[validNames.length - 1].substring(1).toLowerCase();
+        assertEquals(lastofValid, person.getLastName());
     }
 
 
