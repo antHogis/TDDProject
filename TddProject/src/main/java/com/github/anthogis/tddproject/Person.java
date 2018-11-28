@@ -16,7 +16,7 @@ public class Person {
      }
 
     public Person(String firstName, String lastName, LocalDate birthDate) 
-            throws PersonNotBornYetException, GetANewNameException {
+            throws IllegalArgumentException {
         setFirstName(firstName);
         setLastName(lastName);
         setBirthDate(birthDate);
@@ -26,9 +26,9 @@ public class Person {
         return firstName;
     }
 
-    public void setFirstName(String firstName) throws GetANewNameException {
+    public void setFirstName(String firstName) throws IllegalArgumentException {
         if (firstName.equals(null) || firstName.length() < 2) {
-            throw new GetANewNameException("Get a new name, you freak");
+            throw new IllegalArgumentException("Argument firstName must have at least two characters");
         } else {
             this.firstName = firstName;
         }
@@ -38,9 +38,9 @@ public class Person {
         return lastName;
     }
 
-    public void setLastName(String lastName) throws GetANewNameException {
+    public void setLastName(String lastName) throws IllegalArgumentException {
         if (lastName.equals(null) || lastName.length() < 2) {
-            throw new GetANewNameException("Get a new name, you freak");            
+            throw new IllegalArgumentException("Argument firstName must have at least two characters");
         } else {
             this.lastName = lastName;
         }
@@ -50,9 +50,9 @@ public class Person {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) throws PersonNotBornYetException {
+    public void setBirthDate(LocalDate birthDate) throws IllegalArgumentException {
         if (birthDate.compareTo(LocalDate.now()) > 0) {
-            throw new PersonNotBornYetException("Person not born yet");
+            throw new IllegalArgumentException("Given date is in the future");
         } else {
             this.birthDate = birthDate;
         }
@@ -60,19 +60,6 @@ public class Person {
 
     public boolean isUnderAge() {
          return ChronoUnit.YEARS.between(birthDate, LocalDate.now()) >= 18;
-    }
-
-
-    public class PersonNotBornYetException extends RuntimeException{
-        public PersonNotBornYetException(String message) {
-            super(message);
-        }
-    }
-    
-    public class GetANewNameException extends RuntimeException {
-         public GetANewNameException(String message) {
-             super(message);
-         }
     }
 
     @Override

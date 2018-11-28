@@ -19,7 +19,7 @@ public class TestPerson {
         date = LocalDate.now();
     }
 
-    @Test(expected = Person.PersonNotBornYetException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testSetBirthDateException() {
         init();
         date = date.plusMonths(1);
