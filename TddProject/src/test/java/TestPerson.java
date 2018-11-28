@@ -27,7 +27,7 @@ public class TestPerson {
     }
 
     @Test
-    public void testIsUnder18() {
+    public void testIsUnderAge() {
         init();
         date = date.minusYears(20);
         person.setBirthDate(date);
