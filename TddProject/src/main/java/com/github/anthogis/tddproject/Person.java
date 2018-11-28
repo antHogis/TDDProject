@@ -7,6 +7,10 @@ public class Person {
     private String lastName;
     private Date birthDate;
 
+     public Person() {
+
+     }
+
     public Person(String firstName, String lastName, Date birthDate) {
         setFirstName(firstName);
         setLastName(lastName);
@@ -33,7 +37,11 @@ public class Person {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(Date birthDate) throws RuntimeException {
+        if (birthDate.compareTo(new Date()) > 0) {
+            throw new RuntimeException("Person not born yet");
+        } else {
+            this.birthDate = birthDate;
+        }
     }
 }
