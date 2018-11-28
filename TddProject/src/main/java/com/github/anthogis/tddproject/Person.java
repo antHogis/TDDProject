@@ -1,6 +1,7 @@
 package com.github.anthogis.tddproject;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class Person {
@@ -47,7 +48,7 @@ public class Person {
     }
 
     public boolean isUnderAge() {
-         return false;
+         return ChronoUnit.YEARS.between(birthDate, LocalDate.now()) >= 18;
     }
 
 
