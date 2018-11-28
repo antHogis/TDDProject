@@ -27,11 +27,7 @@ public class Person {
     }
 
     public void setFirstName(String firstName) throws IllegalArgumentException {
-        if (firstName.equals(null) || firstName.length() < 2) {
-            throw new IllegalArgumentException("Argument firstName must have at least two characters");
-        } else {
-            this.firstName = firstName;
-        }
+        setNameHelper(firstName, true);
     }
 
     public String getLastName() {
@@ -39,11 +35,7 @@ public class Person {
     }
 
     public void setLastName(String lastName) throws IllegalArgumentException {
-        if (lastName.equals(null) || lastName.length() < 2) {
-            throw new IllegalArgumentException("Argument firstName must have at least two characters");
-        } else {
-            this.lastName = lastName;
-        }
+        setNameHelper(lastName, false);
     }
 
     public LocalDate getBirthDate() {
@@ -55,6 +47,23 @@ public class Person {
             throw new IllegalArgumentException("Given date is in the future");
         } else {
             this.birthDate = birthDate;
+        }
+    }
+
+    private void setNameHelper(String name, boolean first) throws IllegalArgumentException{
+        String exceptionMessage = "Argument firstName must have at least two characters";
+        try {
+            if (name.matches("[a-öA-Ö]{2,}")) {
+                if (first) {
+                    this.firstName = name;
+                } else {
+                    this.lastName = name;
+                }
+            } else {
+                throw new IllegalArgumentException(exceptionMessage);
+            }
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException(exceptionMessage);
         }
     }
 

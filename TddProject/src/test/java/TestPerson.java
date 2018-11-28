@@ -39,5 +39,73 @@ public class TestPerson {
         assertFalse(person.isUnderAge());
     }
 
+    private void setNameHelper(String[] names, boolean assertTrue, boolean setFirst) {
+        boolean[] results = new boolean[names.length];
+
+        for (int i = 0; i < names.length; i++) {
+            try {
+                if (setFirst) {
+                    person.setFirstName(names[i]);
+                } else {
+                    person.setLastName(names[i]);
+                }
+                results[i] = true;
+            } catch (IllegalArgumentException e) {
+                results[i] = false;
+            }
+        }
+
+        for (boolean result : results) {
+            if (assertTrue) assertTrue(result);
+            else assertFalse(result);
+        }
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testSetFirstNameNull() {
+        init();
+        person.setFirstName(null);
+    }
+
+    @Test
+    public void testSetFirstNameInvalid() {
+        init();
+        person.setFirstName("Valid");
+        String[] invalidNames = {"a", "...", "?boy", "girl=?"};
+        setNameHelper(invalidNames, false, true);
+        assertEquals(person.getFirstName(), "Valid");
+    }
+
+    @Test
+    public void testSetFirstNameValid() {
+        init();
+        String[] validNames = {"Po", "Yrjö", "George"};
+        setNameHelper(validNames, true, true);
+        assertEquals(person.getFirstName(), validNames[validNames.length - 1]);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testSetLastNameNull() {
+        init();
+        person.setLastName(null);
+    }
+
+    @Test
+    public void testSetLastNameInvalid() {
+        init();
+        person.setLastName("Valid");
+        String[] invalidNames = {"a", "...", "?boy", "girl=?"};
+        setNameHelper(invalidNames, false, false);
+        assertEquals("Valid", person.getLastName());
+    }
+
+    @Test
+    public void testSetLastNameValid() {
+        init();
+        String[] validNames = {"Po", "Yrjö", "George"};
+        setNameHelper(validNames, true, false);
+        assertEquals(validNames[validNames.length - 1], person.getLastName());
+    }
+
 
 }
