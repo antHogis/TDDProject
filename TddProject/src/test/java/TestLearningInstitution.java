@@ -13,10 +13,15 @@ public class TestLearningInstitution {
     }
 
     @Test
-    public void testAddGrant() {
+    public void testAddGrantWithValidValue() {
         int addAmount = 10;
         int initialAmount = school.getGrantMoney();
         school.addGrant(addAmount);
         assertTrue(school.getGrantMoney() == initialAmount + addAmount);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testAddGrantWithInvalidValue() {
+        school.addGrant(-10);
     }
 }

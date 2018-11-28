@@ -14,12 +14,21 @@ public class LearningInstitution {
         grantMoney = 0;
     }
 
-    public void addGrant(int amount) {
-        grantMoney += amount;
+    public void addGrant(int amount) throws IllegalArgumentException {
+        if (amount >= 0) {
+            grantMoney += amount;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     public int getGrantMoney() {
         return grantMoney;
+    }
+
+    public void addStudent(Person student) {
+        students.add(student);
+        addGrant(10);
     }
 
 }
