@@ -54,6 +54,7 @@ public class Person {
         String exceptionMessage = "Argument firstName must have at least two characters";
         try {
             if (name.matches("[a-öA-Ö]{2,}")) {
+                name = name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase();
                 if (first) {
                     this.firstName = name;
                 } else {
