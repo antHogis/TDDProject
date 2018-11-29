@@ -94,7 +94,13 @@ public class School {
     }
 
     public List<Course> getCoursesCopy() {
-        return new ArrayList<>(courses);
+        List<Course> newList = new ArrayList<>(courses.size());
+
+        for (Course course : courses) {
+            newList.add(course.copyOf());
+        }
+
+        return newList;
     }
 
     public boolean constructorSucceeded() {

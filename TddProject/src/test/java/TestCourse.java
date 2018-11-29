@@ -20,7 +20,7 @@ public class TestCourse {
     }
 
     @Test
-    public void add() {
+    public void addStudent() {
         course = new Course(1, "Test");
         assertTrue(course.addStudent(new Person()));
         assertFalse(course.addStudent(new Person()));

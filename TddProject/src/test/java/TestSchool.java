@@ -209,7 +209,15 @@ public class TestSchool {
 
     @Test
     public void getCoursesCopy() {
+        init();
+        school.addStudent(person);
+        school.addStudent(person);
+        school.addCourse(course);
 
+        List<Course> courseCopy = school.getCoursesCopy();
+        int newMaxStudents = 100;
+        courseCopy.get(0).setMAX_STUDENTS(newMaxStudents);
+        assertNotEquals(newMaxStudents, school.getCoursesCopy().get(0).getMAX_STUDENTS());
     }
 
     

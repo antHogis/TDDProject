@@ -40,6 +40,20 @@ public class Course {
     }
 
     public List<Person> getStudentsCopy() {
-        return new ArrayList<>(students);
+        List<Person> newList = new ArrayList<>(students.size());
+
+        for (Person student : students) {
+            newList.add(student.copyOf());
+        }
+
+        return newList;
+    }
+
+    public Course copyOf() {
+        Course courseCopy = new Course(MAX_STUDENTS, courseName);
+        for (Person student : students) {
+            courseCopy.addStudent(student);
+        }
+        return courseCopy;
     }
 }

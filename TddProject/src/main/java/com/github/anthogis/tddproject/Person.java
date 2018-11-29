@@ -66,6 +66,10 @@ public class Person {
         }
     }
 
+    public Person copyOf() throws IllegalArgumentException {
+        return new Person(firstName, lastName, birthDate);
+    }
+
     private void setNameHelper(String name, boolean first) throws IllegalArgumentException{
         String exceptionMessage = "Argument firstName must have at least two characters";
         try {
