@@ -43,12 +43,12 @@ public class TestPerson {
     }
 
     @Test
-    public void testConstructorValid() {
+    public void constructorValid() {
         person = new Person("Test", "Test", LocalDate.parse("1990-01-01"));
     }
 
     @Test
-    public void testConstructorInvalid() {
+    public void constructorInvalid() {
         boolean caught = false;
 
         try {
@@ -81,19 +81,19 @@ public class TestPerson {
     }
 
     @Test
-    public void testGetFirstName() {
+    public void getFirstName() {
         person = new Person("Testy", "Testington", LocalDate.now());
         assertEquals("Testy", person.getFirstName());
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testSetFirstNameNull() {
+    public void setFirstNameNull() {
         init();
         person.setFirstName(null);
     }
 
     @Test
-    public void testSetFirstNameInvalid() {
+    public void setFirstNameInvalid() {
         init();
         person.setFirstName("Valid");
         String[] invalidNames = {"a", "...", "?boy", "girl=?"};
@@ -102,7 +102,7 @@ public class TestPerson {
     }
 
     @Test
-    public void testSetFirstNameValid() {
+    public void setFirstNameValid() {
         init();
         String[] validNames = {"Po", "Yrjö", "George"};
         setNameHelper(validNames, true, true);
@@ -110,19 +110,19 @@ public class TestPerson {
     }
 
     @Test
-    public void testGetLastName() {
+    public void getLastName() {
         person = new Person("Testy", "Testington", LocalDate.now());
         assertEquals("Testington", person.getLastName());
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testSetLastNameNull() {
+    public void setLastNameNull() {
         init();
         person.setLastName(null);
     }
 
     @Test
-    public void testSetLastNameInvalid() {
+    public void setLastNameInvalid() {
         init();
         person.setLastName("Valid");
         String[] invalidNames = {"a", "...", "?boy", "girl=?"};
@@ -131,7 +131,7 @@ public class TestPerson {
     }
 
     @Test
-    public void testSetLastNameValid() {
+    public void setLastNameValid() {
         init();
         String[] validNames = {"Po", "Yrjö", "george"};
         setNameHelper(validNames, true, false);
@@ -141,7 +141,7 @@ public class TestPerson {
     }
 
     @Test
-    public void testGetBirthDate() {
+    public void getBirthDate() {
         date = LocalDate.now();
         person.setBirthDate(date);
 
@@ -149,14 +149,14 @@ public class TestPerson {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSetBirthDateException() {
+    public void setBirthDateException() {
         init();
         date = date.plusMonths(1);
         person.setBirthDate(date);
     }
 
     @Test
-    public void testIsUnderAge() {
+    public void isUnderAge() {
         init();
         date = date.minusYears(20);
         person.setBirthDate(date);
@@ -169,7 +169,7 @@ public class TestPerson {
     }
 
     @Test
-    public void testEquals() {
+    public void equals() {
         person = new Person("Testy", "Testington", LocalDate.now());
         String otherObject = "Derp";
         assertNotEquals(otherObject, person);
