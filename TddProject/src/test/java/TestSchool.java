@@ -20,12 +20,12 @@ public class TestSchool {
     }
 
     @Test
-    public void testConstructor() {
+    public void school() {
         assertTrue(new School().constructorSucceeded());
     }
 
     @Test
-    public void testAddGrantWithValidValue() {
+    public void addGrantWithValidValue() {
         int addAmount = 10;
         int initialAmount = school.getGrantMoney();
         school.addGrant(addAmount);
@@ -33,12 +33,19 @@ public class TestSchool {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testAddGrantWithInvalidValue() {
+    public void addGrantWithInvalidValue() {
         school.addGrant(-10);
     }
 
     @Test
-    public void testAddStudent() {
+    public void getGrantMoney() {
+        init();
+        school.addStudent(person);
+        assertEquals(10, school.getGrantMoney());
+    }
+
+    @Test
+    public void addStudent() {
         init();
         school.addStudent(person);
         assertEquals(1, school.studentsAmount());
@@ -46,13 +53,13 @@ public class TestSchool {
     }
 
     @Test (expected = InsufficientFundsException.class)
-    public void testAddCourseInsufficientFunds() {
+    public void addCourseInsufficientFunds() {
         init();
         school.addCourse(course);
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testAddCourseIllegalArgument() {
+    public void addCourseIllegalArgument() {
         init();
         school.addStudent(person);
         school.addStudent(person);
@@ -60,7 +67,7 @@ public class TestSchool {
     }
 
     @Test
-    public void testAddCourseValid() {
+    public void addCourseValid() {
         init();
         school.addStudent(person);
         school.addStudent(person);
@@ -68,7 +75,7 @@ public class TestSchool {
     }
 
     @Test
-    public void testAddStudentToCourseValid() {
+    public void addStudentToCourseValid() {
         init();
         Person other = new Person("Unit", "Testington", LocalDate.now());
 
@@ -89,7 +96,7 @@ public class TestSchool {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testAddStudentToCourseReferenceInvalid() {
+    public void addStudentToCourseReferenceInvalid() {
         init();
         Person other = new Person("Unit", "Testington", LocalDate.now());
 
@@ -101,7 +108,7 @@ public class TestSchool {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testAddStudentToCourseFull() {
+    public void addStudentToCourseFull() {
         init();
         Person other = new Person("Unit", "Testington", LocalDate.now());
         course = new Course(1, "Test Course");
@@ -114,7 +121,7 @@ public class TestSchool {
     }
 
     @Test
-    public void testAddStudentToCourseSuccess() {
+    public void addStudentToCourseSuccess() {
         init();
         Person other = new Person("Unit", "Testington", LocalDate.now());
         course = new Course(1, "Test Course");
@@ -126,7 +133,7 @@ public class TestSchool {
     }
 
     @Test
-    public void testGetStudentInfoList() {
+    public void getStudentInfoList() {
         init();
         for (int i = 0; i < 5; i++) {
             school.addStudent(person);
@@ -142,7 +149,7 @@ public class TestSchool {
     }
 
     @Test
-    public void testGetCourseInfoList() {
+    public void getCourseInfoList() {
         init();
         for (int i = 0; i < 10; i++) {
             school.addStudent(person);
@@ -160,16 +167,8 @@ public class TestSchool {
                     courseInfoList.get(i));
         }
     }
+    
+    
 
-
-    @Test
-    public void getGrantMoney() {
-
-    }
-
-
-
-    @Test
-    public void getStudentInfoList() {
-    }
+    
 }
