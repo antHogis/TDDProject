@@ -67,7 +67,66 @@ public class TestSchool {
     }
 
     @Test
+    public void testAddStudentToCourseValid() {
+        init();
+        Person other = new Person("Unit", "Testington", LocalDate.now());
+
+        school.addStudent(person);
+        school.addStudent(other);
+        school.addCourse(course);
+        school.addStudentToCourse(person, course);
+        assertEquals(person, school.getCoursesCopy().get(0).getStudentsCopy().get(0));
+        assertNotEquals(other, school.getCoursesCopy().get(0).getStudentsCopy().get(0));
+
+        init();
+        school.addStudent(person);
+        school.addStudent(other);
+        school.addCourse(course);
+        school.addStudentToCourse(1,0);
+        assertEquals(other, school.getCoursesCopy().get(0).getStudentsCopy().get(0));
+        assertNotEquals(person, school.getCoursesCopy().get(0).getStudentsCopy().get(0));
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testAddStudentToCourseReferenceInvalid() {
+        init();
+        Person other = new Person("Unit", "Testington", LocalDate.now());
+
+        school.addStudent(person);
+        school.addStudent(other);
+        school.addCourse(course);
+        school.addStudentToCourse(new Person("Test", "Test", LocalDate.now()),
+                course);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testAddStudentToCourseFull() {
+        init();
+        Person other = new Person("Unit", "Testington", LocalDate.now());
+        course = new Course(1, "Test Course");
+
+        school.addStudent(person);
+        school.addStudent(other);
+        school.addCourse(course);
+        school.addStudentToCourse(person, course);
+        school.addStudentToCourse(other, course);
+    }
+
+    @Test
+    public void testAddStudentToCourseSuccess() {
+        init();
+        Person other = new Person("Unit", "Testington", LocalDate.now());
+        course = new Course(1, "Test Course");
+
+        school.addStudent(person);
+        school.addStudent(other);
+        school.addCourse(course);
+        school.addStudentToCourse(person, course);
+    }
+
+    @Test
     public void getGrantMoney() {
+
     }
 
 
