@@ -20,7 +20,7 @@ public class TestSchool {
     }
 
     @Test
-    public void school() {
+    public void constructor() {
         assertTrue(new School().constructorSucceeded());
     }
 
@@ -168,7 +168,49 @@ public class TestSchool {
         }
     }
     
-    
+    @Test
+    public void hasMoneyForNewCourse() {
+        init();
+        assertFalse(school.hasMoneyForNewCourse());
+        school.addStudent(person);
+        assertFalse(school.hasMoneyForNewCourse());
+        school.addStudent(person);
+        assertTrue(school.hasMoneyForNewCourse());
+    }
+
+    @Test
+    public void studentsAmount() {
+        init();
+        assertEquals(0, school.studentsAmount());
+        int amount = 100;
+        for (int i = 0; i < amount; i++) {
+            school.addStudent(person);
+        }
+
+        assertEquals(amount, school.studentsAmount());
+    }
+
+    @Test
+    public void coursesAmount() {
+        init();
+        assertEquals(0, school.coursesAmount());
+
+        int amount = 100;
+        for (int i = 0; i < amount; i++) {
+            school.addStudent(person);
+        }
+
+        for(int i = 0; i < (amount / 2); i++) {
+            school.addCourse(course);
+        }
+
+        assertEquals(amount / 2, school.coursesAmount());
+    }
+
+    @Test
+    public void getCoursesCopy() {
+
+    }
 
     
 }
