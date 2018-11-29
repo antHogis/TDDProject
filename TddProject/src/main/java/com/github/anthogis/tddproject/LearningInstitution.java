@@ -49,6 +49,13 @@ public class LearningInstitution {
         }
     }
 
+    public void addStudentToCourse(int studentIndex, int courseIndex)
+            throws IllegalArgumentException {
+        if (!courses.get(courseIndex).addStudent(students.get(studentIndex))) {
+            throw new IllegalArgumentException("That course is full!");
+        }
+    }
+
     public List<String> getStudentInfoList() {
         List<String> studentList = new ArrayList<>(students.size());
         for (int i = 0; i < students.size(); i++) {
@@ -73,6 +80,14 @@ public class LearningInstitution {
 
     public boolean hasMoneyForNewCourse() {
         return grantMoney - courseCost >= 0;
+    }
+
+    public int studentsAmount() {
+        return students.size();
+    }
+
+    public int coursesAmount() {
+        return courses.size();
     }
 
 }

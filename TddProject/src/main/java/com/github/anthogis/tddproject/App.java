@@ -29,6 +29,7 @@ public class App {
             if (input.equals(c.command)) {
                 c.action.run();
                 validCommand = true;
+                break;
             }
         }
 
@@ -41,7 +42,8 @@ public class App {
         ADD_STUDENT("add stud", "Add student to the school", Commands::addStudent),
         LIST_STUDENTS("list studs", "List students", Commands::listStudents),
         ADD_COURSE("add crs", "Add a course for the school", Commands::addCourse),
-        LIST_COURSES("list crs", "List courses", Commands::listCourses);
+        LIST_COURSES("list crs", "List courses", Commands::listCourses),
+        ADD_STUDENT_COURSE("add stud crs", "Add a student to a course", Commands::addStudentToCourse);
 
         private String command;
         private String description;
@@ -55,6 +57,7 @@ public class App {
 
         static String addMode = "add>";
         static String error = "%s (Reason: %s)\n";
+        static String exit = "exit";
 
 
         static void help() {
@@ -137,6 +140,7 @@ public class App {
                     System.out.printf(error, invalid, e.getMessage());
                 }
 
+                valid = false;
                 //Prompting for name of course
                 while (!valid) try {
                     System.out.println("Input value for the name of the course.");
@@ -163,5 +167,65 @@ public class App {
                 System.out.println("There are no courses in this school!");
             }
         }
+
+        static void addStudentToCourse() {
+            if (school.coursesAmount() == 0) {
+                System.out.println("There are no courses in this school!");
+            } else if (school.studentsAmount() == 0) {
+                System.out.println("There are no students in this school!");
+            } else {
+                int studentNumber = 0;
+                int courseNumber = 0;
+                boolean valid = false;
+                boolean quit = false;
+
+                while (!valid && !quit) try {
+                    System.out.println("Input student number. Type list studs for list. Type exit to quit this mode.");
+                    System.out.print(addMode);
+                    String input = scanner.nextLine();
+                    if (input.equals(LIST_STUDENTS.command)) {
+                        listStudents();
+                    } else if (input.equals(exit)) {
+                        quit = true;
+                    } else {
+                        studentNumber = Integer.parseInt(input);
+                        if (studentNumber >= 0 && studentNumber < school.studentsAmount()) {
+                            valid = true;
+                        } else {
+                            throw new IllegalArgumentException(String.format(
+                                    "Value not between %d and %d", 0, school.studentsAmount() - 1));
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.printf(error, invalid, e.getMessage());
+                }
+
+                valid = false;
+                while (!valid && !quit) try {
+                    System.out.println("Input course number. Type list crs for list. Type exit to quit this mode.");
+                    System.out.print(addMode);
+                    String input = scanner.nextLine();
+                    if (input.equals(LIST_COURSES.command)) {
+                        listCourses();
+                    } else if (input.equals(exit)) {
+                        quit = true;
+                    } else {
+                        courseNumber = Integer.parseInt(input);
+                        if (courseNumber >= 0 && courseNumber < school.coursesAmount()) {
+                            school.addStudentToCourse(studentNumber, courseNumber);
+                            valid = true;
+                        } else {
+                            throw new IllegalArgumentException(String.format(
+                                    "Value not between %d and %d", 0, school.studentsAmount() - 1));
+                        }
+                    }
+
+                } catch (IllegalArgumentException e) {
+                    System.out.printf(error, invalid, e.getMessage());
+                }
+            }
+        }
+
+
     }
 }
