@@ -53,7 +53,7 @@ public class App {
         }
 
         static String addMode = "add>";
-        static String error = "%s (Reason: %s)";
+        static String error = "%s (Reason: %s)\n";
 
 
         static void help() {
@@ -122,16 +122,32 @@ public class App {
         static void addCourse() {
             if (school.hasMoneyForNewCourse()) {
                 boolean valid = false;
+                int maxStudents = -1;
+
+                //Prompting for max students of course
                 while (!valid) try {
                     System.out.println("Input value for max students for course.");
                     System.out.print(addMode);
                     String input = scanner.nextLine();
-                    int maxStudents = Integer.parseInt(input);
-                    school.addCourse(new Course(maxStudents));
+                    maxStudents = Integer.parseInt(input);
+                    new Course(maxStudents, "Testing");
                     valid = true;
-                } catch (InsufficientFundsException | IllegalArgumentException e) {
+                } catch (IllegalArgumentException e) {
                     System.out.printf(error, invalid, e.getMessage());
                 }
+
+                //Prompting for name of course
+                while (!valid) try {
+                    System.out.println("Input value for the name of the course.");
+                    System.out.print(addMode);
+                    String input = scanner.nextLine();
+                    school.addCourse(new Course(maxStudents, input));
+                    valid = true;
+                } catch (IllegalArgumentException e) {
+                    System.out.printf(error, invalid, e.getMessage());
+                }
+            } else {
+                System.out.println(new InsufficientFundsException().getMessage());
             }
         }
     }

@@ -46,11 +46,22 @@ public class LearningInstitution {
         List<String> studentList = new ArrayList<>(students.size());
         for (int i = 0; i < students.size(); i++) {
             Person s = students.get(i);
-            studentList.add(String.format("%d. %s, %s %s\n", i, s.getLastName(),
+            studentList.add(String.format("%d. %s, %s %s", i, s.getLastName(),
                     s.getFirstName(), s.getBirthDate()));
         }
 
         return studentList;
+    }
+
+    public List<String> getCourseInfoList() {
+        List<String> courseList = new ArrayList<>(courses.size());
+        for (int i = 0; i < courses.size(); i++) {
+            Course c = courses.get(i);
+            courseList.add(String.format("%d. %s, Now: %d, Max: %d",
+                    i, c.getCourseName(), c.studentsInCourse(), c.getMAX_STUDENTS()));
+        }
+
+        return courseList;
     }
 
     public boolean hasMoneyForNewCourse() {
