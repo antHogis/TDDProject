@@ -143,7 +143,22 @@ public class TestSchool {
 
     @Test
     public void testGetCourseInfoList() {
+        init();
+        for (int i = 0; i < 10; i++) {
+            school.addStudent(person);
+        }
 
+        for (int i = 0; i < 5; i++) {
+            school.addCourse(course);
+        }
+
+        List<String> courseInfoList = school.getCourseInfoList();
+
+        for (int i = 0; i < courseInfoList.size(); i++) {
+            assertEquals(String.format("%d. %s, Now: %d, Max: %d",
+                    i, course.getCourseName(), course.studentsInCourse(), course.getMAX_STUDENTS()),
+                    courseInfoList.get(i));
+        }
     }
 
 
