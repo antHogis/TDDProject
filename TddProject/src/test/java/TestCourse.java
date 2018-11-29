@@ -10,13 +10,13 @@ public class TestCourse {
 
     @Test
     public void testAdd() {
-        course = new Course(1);
+        course = new Course(1, "Meh");
         course.addStudent(new Person());
         assertFalse(course.addStudent(new Person()));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testMaxStudentsNegative() {
-        course = new Course(-3);
+        course = new Course(-3, "Derp");
     }
 }
