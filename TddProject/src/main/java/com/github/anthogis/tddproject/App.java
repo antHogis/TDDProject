@@ -161,6 +161,7 @@ public class App {
                     String input = scanner.nextLine();
                     school.addCourse(new Course(maxStudents, input));
                     valid = true;
+                    System.out.println("Course added!");
                 } catch (IllegalArgumentException e) {
                     System.out.printf(error, invalid, e.getMessage());
                 }
@@ -238,7 +239,5 @@ public class App {
                 }
             }
         }
-
-
     }
 }
