@@ -37,13 +37,13 @@ public class App {
     }
 
     private enum Commands {
-        HELP("help", "List all commands", Commands::help),
-        QUIT("quit", "Quit the app", Commands::quit),
-        ADD_STUDENT("add stud", "Add student to the school", Commands::addStudent),
-        LIST_STUDENTS("list studs", "List students", Commands::listStudents),
         ADD_COURSE("add crs", "Add a course for the school", Commands::addCourse),
+        ADD_STUDENT("add stud", "Add student to the school", Commands::addStudent),
+        ADD_STUDENT_COURSE("add stud crs", "Add a student to a course", Commands::addStudentToCourse),
+        HELP("help", "List all commands", Commands::help),
         LIST_COURSES("list crs", "List courses", Commands::listCourses),
-        ADD_STUDENT_COURSE("add stud crs", "Add a student to a course", Commands::addStudentToCourse);
+        LIST_STUDENTS("list studs", "List students", Commands::listStudents),
+        QUIT("quit", "Quit the app", Commands::quit);
 
         private String command;
         private String description;
@@ -61,8 +61,21 @@ public class App {
 
 
         static void help() {
+            int len = 0;
             for (Commands c : Commands.values()) {
-                System.out.printf("%s - %s\n", c.command, c.description);
+                if (c.command.length() > len) {
+                    len = c.command.length();
+                }
+            }
+
+            for (Commands c : Commands.values()) {
+                StringBuilder indent = new StringBuilder();
+
+                for (int i = c.command.length(); i < len; i++) {
+                    indent.append(' ');
+                }
+
+                System.out.printf("%s%s - %s\n", c.command, indent.toString(), c.description);
             }
         }
 
@@ -82,7 +95,7 @@ public class App {
                 student.setFirstName(name);
                 valid = true;
             } catch (IllegalArgumentException e) {
-                System.out.printf(error,invalid,e.getMessage());
+                System.out.printf(error, invalid, e.getMessage());
             }
 
             valid = false;
@@ -93,7 +106,7 @@ public class App {
                 student.setLastName(name);
                 valid = true;
             } catch (IllegalArgumentException e) {
-                System.out.printf(error,invalid,e.getMessage());
+                System.out.printf(error, invalid, e.getMessage());
             }
 
             valid = false;
@@ -104,7 +117,7 @@ public class App {
                 student.setBirthDate(LocalDate.parse(date));
                 valid = true;
             } catch (Exception e) {
-                System.out.printf(error,invalid,e.getMessage());
+                System.out.printf(error, invalid, e.getMessage());
             }
 
             school.addStudent(student);
