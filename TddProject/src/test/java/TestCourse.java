@@ -10,7 +10,7 @@ public class TestCourse {
     static Course course;
 
     @Test
-    public void testConstructor() {
+    public void constructor() {
         int MAX_STUDENTS = 2;
         String courseName = "Test";
 
@@ -20,29 +20,29 @@ public class TestCourse {
     }
 
     @Test
-    public void testAdd() {
+    public void add() {
         course = new Course(1, "Test");
         assertTrue(course.addStudent(new Person()));
         assertFalse(course.addStudent(new Person()));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSetMaxStudentsNegative() {
+    public void setMaxStudentsNegative() {
         course = new Course(-3, "Test");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSetMaxStudentsZero() {
+    public void setMaxStudentsZero() {
         course = new Course(0, "Test");
     }
 
     @Test
-    public void testSetMaxStudentsPositive() {
+    public void setMaxStudentsPositive() {
         course = new Course(1, "Test");
     }
 
     @Test
-    public void testStudentsInCourse() {
+    public void studentsInCourse() {
         course = new Course(1, "Test");
         assertEquals(0, course.studentsInCourse());
         course.addStudent(new Person("Test", "Test",
@@ -51,13 +51,13 @@ public class TestCourse {
     }
 
     @Test
-    public void testGetMAX_STUDENTS() {
+    public void getMAX_STUDENTS() {
         course = new Course(2, "Test");
         assertEquals(2, course.getMAX_STUDENTS());
     }
 
     @Test
-    public void testGetCourseName() {
+    public void getCourseName() {
         course = new Course(2, "Test");
         assertEquals("Test", course.getCourseName());
     }
