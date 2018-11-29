@@ -7,6 +7,7 @@ public class LearningInstitution {
     private List<Person> students;
     private List<Course> courses;
     private int grantMoney;
+    private static int courseCost = 20;
 
     public LearningInstitution() {
         students = new ArrayList<>();
@@ -31,8 +32,14 @@ public class LearningInstitution {
         addGrant(10);
     }
 
-    public void addCourse() {
-
+    public void addCourse(Course course) throws InsufficientFundsException,
+            IllegalArgumentException {
+        if (hasMoneyForNewCourse()) {
+            courses.add(course);
+            grantMoney -= courseCost;
+        } else {
+            throw new InsufficientFundsException();
+        }
     }
 
     public List<String> getStudentInfoList() {
@@ -44,6 +51,10 @@ public class LearningInstitution {
         }
 
         return studentList;
+    }
+
+    public boolean hasMoneyForNewCourse() {
+        return grantMoney - courseCost >= 0;
     }
 
 }

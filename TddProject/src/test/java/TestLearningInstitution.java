@@ -24,4 +24,20 @@ public class TestLearningInstitution {
     public void testAddGrantWithInvalidValue() {
         school.addGrant(-10);
     }
+
+    @Test
+    public void getGrantMoney() {
+    }
+
+    @Test
+    public void addStudent() {
+    }
+
+    @Test
+    public void addCourse() {
+    }
+
+    @Test
+    public void getStudentInfoList() {
+    }
 }
