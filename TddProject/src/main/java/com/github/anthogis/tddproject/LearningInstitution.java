@@ -90,4 +90,8 @@ public class LearningInstitution {
         return courses.size();
     }
 
+    public boolean constructorSucceeded() {
+        return students.size() == 0 && courses.size() == 0 && grantMoney == 0;
+    }
+
 }

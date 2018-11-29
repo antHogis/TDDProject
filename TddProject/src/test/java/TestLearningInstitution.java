@@ -13,6 +13,11 @@ public class TestLearningInstitution {
     }
 
     @Test
+    public void testConstructor() {
+        assertTrue(new LearningInstitution().constructorSucceeded());
+    }
+
+    @Test
     public void testAddGrantWithValidValue() {
         int addAmount = 10;
         int initialAmount = school.getGrantMoney();
