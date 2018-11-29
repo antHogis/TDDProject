@@ -38,4 +38,8 @@ public class Course {
     public String getCourseName() {
         return courseName;
     }
+
+    public List<Person> getStudentsCopy() {
+        return new ArrayList<>(students);
+    }
 }

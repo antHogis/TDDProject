@@ -90,8 +90,11 @@ public class School {
         return courses.size();
     }
 
+    public List<Course> getCoursesCopy() {
+        return new ArrayList<>(courses);
+    }
+
     public boolean constructorSucceeded() {
         return students.size() == 0 && courses.size() == 0 && grantMoney == 0;
     }
-
 }
