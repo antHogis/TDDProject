@@ -3,6 +3,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -123,6 +124,28 @@ public class TestSchool {
         school.addCourse(course);
         school.addStudentToCourse(person, course);
     }
+
+    @Test
+    public void testGetStudentInfoList() {
+        init();
+        for (int i = 0; i < 5; i++) {
+            school.addStudent(person);
+        }
+
+        List<String> studentInfoList = school.getStudentInfoList();
+
+        for (int i = 0; i < studentInfoList.size(); i++) {
+            assertEquals(String.format("%d. %s, %s %s", i, person.getLastName(),
+                    person.getFirstName(), person.getBirthDate()),
+                    studentInfoList.get(i));
+        }
+    }
+
+    @Test
+    public void testGetCourseInfoList() {
+
+    }
+
 
     @Test
     public void getGrantMoney() {
