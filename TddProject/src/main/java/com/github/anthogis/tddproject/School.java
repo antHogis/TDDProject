@@ -3,13 +3,13 @@ package com.github.anthogis.tddproject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LearningInstitution {
+public class School {
     private List<Person> students;
     private List<Course> courses;
     private int grantMoney;
     private static int courseCost = 20;
 
-    public LearningInstitution() {
+    public School() {
         students = new ArrayList<>();
         courses = new ArrayList<>();
         grantMoney = 0;

@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
     TestPerson.class,
     TestCourse.class,
-    TestLearningInstitution.class
+    TestSchool.class
 })
 public class TddProjectSuite {
     //This class only functions as a holder for annotations above.

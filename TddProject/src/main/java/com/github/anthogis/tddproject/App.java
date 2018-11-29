@@ -6,14 +6,14 @@ import java.util.Scanner;
 
 public class App {
     static Scanner scanner;
-    static LearningInstitution school;
+    static School school;
     static boolean run;
     final static String invalid = "Invalid input!";
 
     public static void main(String [] args) {
         scanner = new Scanner(System.in);
         run = true;
-        school = new LearningInstitution();
+        school = new School();
 
         System.out.println("Welcome to School Tycoon 2018!\nType help to see list of commands.");
 

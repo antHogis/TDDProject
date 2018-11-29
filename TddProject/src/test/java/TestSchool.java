@@ -6,21 +6,21 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
-public class TestLearningInstitution {
-    static LearningInstitution school;
+public class TestSchool {
+    static School school;
     static Person person;
     static Course course;
 
     @BeforeClass
     public static void init() {
-        school = new LearningInstitution();
+        school = new School();
         person = new Person("Testy", "Testington", LocalDate.now());
         course = new Course(1, "Test Course");
     }
 
     @Test
     public void testConstructor() {
-        assertTrue(new LearningInstitution().constructorSucceeded());
+        assertTrue(new School().constructorSucceeded());
     }
 
     @Test
