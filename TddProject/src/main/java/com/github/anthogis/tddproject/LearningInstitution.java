@@ -42,6 +42,13 @@ public class LearningInstitution {
         }
     }
 
+    public void addStudentToCourse(Person student, Course course)
+            throws IllegalArgumentException {
+        if (!course.addStudent(student)) {
+            throw new IllegalArgumentException("That course is full!");
+        }
+    }
+
     public List<String> getStudentInfoList() {
         List<String> studentList = new ArrayList<>(students.size());
         for (int i = 0; i < students.size(); i++) {
