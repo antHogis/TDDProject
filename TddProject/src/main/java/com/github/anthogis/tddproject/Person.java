@@ -50,6 +50,22 @@ public class Person {
         }
     }
 
+    public boolean isUnderAge() {
+         return ChronoUnit.YEARS.between(birthDate, LocalDate.now()) >= 18;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Person) {
+            return this.firstName.equals(((Person) obj).getFirstName()) &&
+                    this.lastName.equals(((Person) obj).getLastName()) &&
+                    this.birthDate.equals(((Person) obj).getBirthDate());
+            
+        } else {
+            return false;
+        }
+    }
+
     private void setNameHelper(String name, boolean first) throws IllegalArgumentException{
         String exceptionMessage = "Argument firstName must have at least two characters";
         try {
@@ -65,22 +81,6 @@ public class Person {
             }
         } catch (NullPointerException e) {
             throw new IllegalArgumentException(exceptionMessage);
-        }
-    }
-
-    public boolean isUnderAge() {
-         return ChronoUnit.YEARS.between(birthDate, LocalDate.now()) >= 18;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Person) {
-            return this.firstName.equals(((Person) obj).getFirstName()) &&
-                    this.lastName.equals(((Person) obj).getLastName()) &&
-                    this.birthDate.equals(((Person) obj).getBirthDate());
-            
-        } else {
-            return false;
         }
     }
 }

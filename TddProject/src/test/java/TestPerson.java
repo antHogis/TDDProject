@@ -19,6 +19,29 @@ public class TestPerson {
         date = LocalDate.now();
     }
 
+    //Helper method for testing setting firstName or lastName
+    private void setNameHelper(String[] names, boolean assertTrue, boolean setFirst) {
+        boolean[] results = new boolean[names.length];
+
+        for (int i = 0; i < names.length; i++) {
+            try {
+                if (setFirst) {
+                    person.setFirstName(names[i]);
+                } else {
+                    person.setLastName(names[i]);
+                }
+                results[i] = true;
+            } catch (IllegalArgumentException e) {
+                results[i] = false;
+            }
+        }
+
+        for (boolean result : results) {
+            if (assertTrue) assertTrue(result);
+            else assertFalse(result);
+        }
+    }
+
     @Test
     public void testConstructorValid() {
         person = new Person("Test", "Test", LocalDate.parse("1990-01-01"));
@@ -57,46 +80,10 @@ public class TestPerson {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetBirthDateException() {
-        init();
-        date = date.plusMonths(1);
-        person.setBirthDate(date);
-    }
-
     @Test
-    public void testIsUnderAge() {
-        init();
-        date = date.minusYears(20);
-        person.setBirthDate(date);
-        assertTrue(person.isUnderAge());
-
-        init();
-        date = date.minusYears(17);
-        person.setBirthDate(date);
-        assertFalse(person.isUnderAge());
-    }
-
-    private void setNameHelper(String[] names, boolean assertTrue, boolean setFirst) {
-        boolean[] results = new boolean[names.length];
-
-        for (int i = 0; i < names.length; i++) {
-            try {
-                if (setFirst) {
-                    person.setFirstName(names[i]);
-                } else {
-                    person.setLastName(names[i]);
-                }
-                results[i] = true;
-            } catch (IllegalArgumentException e) {
-                results[i] = false;
-            }
-        }
-
-        for (boolean result : results) {
-            if (assertTrue) assertTrue(result);
-            else assertFalse(result);
-        }
+    public void testGetFirstName() {
+        person = new Person("Testy", "Testington", LocalDate.now());
+        assertEquals("Testy", person.getFirstName());
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -120,6 +107,12 @@ public class TestPerson {
         String[] validNames = {"Po", "Yrjö", "George"};
         setNameHelper(validNames, true, true);
         assertEquals(person.getFirstName(), validNames[validNames.length - 1]);
+    }
+
+    @Test
+    public void testGetLastName() {
+        person = new Person("Testy", "Testington", LocalDate.now());
+        assertEquals("Testington", person.getLastName());
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -146,6 +139,49 @@ public class TestPerson {
                 validNames[validNames.length - 1].substring(1).toLowerCase();
         assertEquals(lastofValid, person.getLastName());
     }
+
+    @Test
+    public void testGetBirthDate() {
+        date = LocalDate.now();
+        person.setBirthDate(date);
+
+        assertEquals(date, person.getBirthDate());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetBirthDateException() {
+        init();
+        date = date.plusMonths(1);
+        person.setBirthDate(date);
+    }
+
+    @Test
+    public void testIsUnderAge() {
+        init();
+        date = date.minusYears(20);
+        person.setBirthDate(date);
+        assertTrue(person.isUnderAge());
+
+        init();
+        date = date.minusYears(17);
+        person.setBirthDate(date);
+        assertFalse(person.isUnderAge());
+    }
+
+    @Test
+    public void testEquals() {
+        person = new Person("Testy", "Testington", LocalDate.now());
+        String otherObject = "Derp";
+        assertNotEquals(otherObject, person);
+
+        Person otherPerson = new Person("Unit", "Testington", LocalDate.now());
+        assertNotEquals(otherPerson, person);
+
+        otherPerson.setFirstName("Testy");
+        assertEquals(otherPerson, person);
+
+    }
+
 
 
 }
