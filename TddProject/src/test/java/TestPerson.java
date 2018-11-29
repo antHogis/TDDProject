@@ -182,6 +182,17 @@ public class TestPerson {
 
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void copyOfNullAtributes() {
+        init();
+        person.copyOf();
+    }
 
+    @Test
+    public void copyOf() {
+        person = new Person("First","Last",LocalDate.now());
+        Person copy = person.copyOf();
 
+        assertNotSame(copy, person);
+    }
 }

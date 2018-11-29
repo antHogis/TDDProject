@@ -218,6 +218,9 @@ public class TestSchool {
         int newMaxStudents = 100;
         courseCopy.get(0).setMAX_STUDENTS(newMaxStudents);
         assertNotEquals(newMaxStudents, school.getCoursesCopy().get(0).getMAX_STUDENTS());
+
+        courseCopy.add(new Course(2, "Test"));
+        assertNotEquals(courseCopy.size(), school.coursesAmount());
     }
 
     

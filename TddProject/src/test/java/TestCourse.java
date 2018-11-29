@@ -3,6 +3,7 @@ import com.github.anthogis.tddproject.Person;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -60,6 +61,25 @@ public class TestCourse {
     public void getCourseName() {
         course = new Course(2, "Test");
         assertEquals("Test", course.getCourseName());
+    }
+
+    @Test
+    public void getStudentsCopy() {
+        course = new Course(1,"Test");
+        List<Person> studentsCopy = course.getStudentsCopy();
+        studentsCopy.add(new Person("Testy", "Testington", LocalDate.now()));
+        assertNotEquals(course.studentsInCourse(), studentsCopy.size());
+
+    }
+
+    @Test
+    public void copyOf() {
+        course = new Course(1,"Test");
+        Course copy = course.copyOf();
+        copy.setMAX_STUDENTS(2);
+        copy.addStudent(new Person("Testy", "Testington", LocalDate.now()));
+        assertNotEquals(copy.studentsInCourse(), course.studentsInCourse());
+        assertNotEquals(copy.getMAX_STUDENTS(), course.getMAX_STUDENTS());
     }
 
 

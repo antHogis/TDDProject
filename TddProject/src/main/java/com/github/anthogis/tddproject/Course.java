@@ -52,7 +52,7 @@ public class Course {
     public Course copyOf() {
         Course courseCopy = new Course(MAX_STUDENTS, courseName);
         for (Person student : students) {
-            courseCopy.addStudent(student);
+            courseCopy.addStudent(student.copyOf());
         }
         return courseCopy;
     }
