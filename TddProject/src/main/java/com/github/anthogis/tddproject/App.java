@@ -15,7 +15,7 @@ public class App {
         run = true;
         school = new LearningInstitution();
 
-        System.out.println("Welcome!\nType help to see list of commands.");
+        System.out.println("Welcome to School Tycoon 2018!\nType help to see list of commands.");
 
         while (run) {
             System.out.print("main>");
