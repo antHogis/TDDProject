@@ -45,14 +45,14 @@ public class LearningInstitution {
     public void addStudentToCourse(Person student, Course course)
             throws IllegalArgumentException {
         if (!course.addStudent(student)) {
-            throw new IllegalArgumentException("That course is full!");
+            throw new IllegalArgumentException("Student could not be added!");
         }
     }
 
     public void addStudentToCourse(int studentIndex, int courseIndex)
             throws IllegalArgumentException {
         if (!courses.get(courseIndex).addStudent(students.get(studentIndex))) {
-            throw new IllegalArgumentException("That course is full!");
+            throw new IllegalArgumentException("Student could not be added!");
         }
     }
 
