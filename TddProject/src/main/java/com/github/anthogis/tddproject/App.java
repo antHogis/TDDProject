@@ -40,7 +40,8 @@ public class App {
         QUIT("quit", "Quit the app", Commands::quit),
         ADD_STUDENT("add stud", "Add student to the school", Commands::addStudent),
         LIST_STUDENTS("list studs", "List students", Commands::listStudents),
-        ADD_COURSE("add crs", "Add a course for the school", Commands::addCourse);
+        ADD_COURSE("add crs", "Add a course for the school", Commands::addCourse),
+        LIST_COURSES("list crs", "List courses", Commands::listCourses);
 
         private String command;
         private String description;
@@ -148,6 +149,18 @@ public class App {
                 }
             } else {
                 System.out.println(new InsufficientFundsException().getMessage());
+            }
+        }
+
+        static void listCourses() {
+            List<String> courses = school.getCourseInfoList();
+
+            for (String course : courses) {
+                System.out.println(course);
+            }
+
+            if (courses.size() < 1) {
+                System.out.println("There are no courses in this school!");
             }
         }
     }
