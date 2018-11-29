@@ -19,6 +19,44 @@ public class TestPerson {
         date = LocalDate.now();
     }
 
+    @Test
+    public void testConstructorValid() {
+        person = new Person("Test", "Test", LocalDate.parse("1990-01-01"));
+    }
+
+    @Test
+    public void testConstructorInvalid() {
+        boolean caught = false;
+
+        try {
+            person = new Person(null, "Test", LocalDate.parse("1990-01-01"));
+        } catch (IllegalArgumentException e) {
+            caught = true;
+        } finally {
+            assertTrue(caught);
+        }
+
+        caught = false;
+
+        try {
+            person = new Person("Test", null, LocalDate.parse("1990-01-01"));
+        } catch (IllegalArgumentException e) {
+            caught = true;
+        } finally {
+            assertTrue(caught);
+        }
+
+        caught = false;
+
+        try {
+            person = new Person("Test", "test", null);
+        } catch (IllegalArgumentException e) {
+            caught = true;
+        } finally {
+            assertTrue(caught);
+        }
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testSetBirthDateException() {
         init();

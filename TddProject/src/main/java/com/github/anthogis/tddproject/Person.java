@@ -9,7 +9,7 @@ public class Person {
     private String lastName;
     private LocalDate birthDate;
 
-     public Person() {
+    public Person() {
          firstName = null;
          lastName = null;
          birthDate = null;
@@ -43,7 +43,7 @@ public class Person {
     }
 
     public void setBirthDate(LocalDate birthDate) throws IllegalArgumentException {
-        if (birthDate.compareTo(LocalDate.now()) > 0) {
+        if (birthDate == null || birthDate.compareTo(LocalDate.now()) > 0) {
             throw new IllegalArgumentException("Given date is in the future");
         } else {
             this.birthDate = birthDate;
